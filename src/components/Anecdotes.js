@@ -9,7 +9,7 @@ const Anecdotes = () => {
   const anecdotes = useSelector(state => state.anecdotes)
   const filter = useSelector(state => state.filter)
 
-  const showAnecdotes = anecdotes.filter(anecdote => anecdote.content.includes(filter))
+  const showAnecdotes = anecdotes.filter(anecdote => anecdote.content.toLowerCase().includes(filter.toLowerCase()))
   showAnecdotes.sort((a, b) => parseFloat(b.votes) - parseFloat(a.votes));
 
   const vote = (id, content) => {
