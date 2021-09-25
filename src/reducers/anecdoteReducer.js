@@ -19,6 +19,13 @@ export const createAnecdote = (content) => {
   }
 }
 
+export const initializeAnecdotes = (notes) => {
+  return {
+    type: 'INIT_ANECDOTES',
+    data: notes
+  }
+}
+
 const anecdoteReducer = (state = [], action) => {
   switch (action.type) {
     case 'VOTE': {
@@ -34,6 +41,9 @@ const anecdoteReducer = (state = [], action) => {
     }
     case 'NEW_ANECDOTE': {
       return [...state, action.data]
+    }
+    case 'INIT_ANECDOTES': {
+      return action.data
     }
     default:
       return state
