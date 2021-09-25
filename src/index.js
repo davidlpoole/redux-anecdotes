@@ -7,6 +7,7 @@ import App from './App'
 import anecdoteReducer from './reducers/anecdoteReducer'
 import notificationReducer from './reducers/notificationReducer'
 import filterReducer from './reducers/filterReducer'
+import anecdoteService from './services/anecdotes'
 
 const reducer = combineReducers({
   notification: notificationReducer,
@@ -17,6 +18,14 @@ const reducer = combineReducers({
 const store = createStore(
   reducer,
   composeWithDevTools())
+
+
+anecdoteService.getAll().then(notes =>
+  notes.forEach(note => {
+    store.dispatch({
+      type: 'NEW_ANECDOTE', data: note
+    })
+  }))
 
 ReactDOM.render(
   <Provider store={store}>
